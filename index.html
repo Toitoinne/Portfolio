@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antoine MANCEAU | Portfolio</title>
+    <style>
+        :root {
+            --primary: #FF4D8D; /* Rose électrique */
+            --secondary: #00F0FF; /* Cyan néon */
+            --dark: #0F0F1A; /* Noir bleuté */
+            --light: #F0F0FF; /* Blanc lumineux */
+            --accent: #FFD300; /* Jaune festival */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.7;
+            background-image: url(background.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 15, 26, 0.85);
+            z-index: -1;
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(255, 77, 141, 0.9), rgba(0, 240, 255, 0.7));
+            color: white;
+            padding: 4rem 0 6rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+        
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        nav {
+            background-color: rgba(15, 15, 26, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1.2rem 0;
+        }
+        
+        nav li {
+            margin: 0 1.8rem;
+            position: relative;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .card {
+            background: rgba(25, 25, 40, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(255, 77, 141, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(255, 77, 141, 0.2);
+            border: 1px solid rgba(255, 77, 141, 0.4);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -42px;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--dark);
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            background: rgba(255, 211, 0, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            height: 220px;
+            background: #222;
+            position: relative;
+            border: 1px solid rgba(255, 77, 141, 0.3);
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 77, 141, 0.3);
+            border: 1px solid var(--primary);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            z-index: 2;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        footer {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark);
+            text-align: center;
+            padding: 4rem 0 3rem;
+            margin-top: 5rem;
+            clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--dark);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.4);
+            color: var(--dark);
+        }
+        
+        .music-note {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .note-1 {
+            top: 20%;
+            left: 5%;
+            font-size: 5rem;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .note-2 {
+            bottom: 30%;
+            right: 8%;
+            font-size: 7rem;
+            animation: float 8s ease-in-out infinite 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                padding: 0.8rem 0;
+            }
+            
+            nav li {
+                margin: 0.5rem 1rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                padding-left: 40px;
+            }
+            
+            .timeline-item::before {
+                left: -32px;
+            }
+        }
+    </style>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notes de musique décoratives -->
+    <div class="music-note note-1">
+        <i class="fas fa-music"></i>
+    </div>
+    <div class="music-note note-2">
+        <i class="fas fa-headphones"></i>
+    </div>
+    
+    <header>
+        <div class="container">
+            <!-- Remplacez par votre photo de profil -->
+            <img src="images/MOI.jpg" alt="Antoine MANCEAU" class="profile-img pulse">
+            <h1>Antoine MANCEAU</h1>
+            <p class="subtitle">Étudiant en Information & Communication • Passionné par l'industrie musicale</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">Présentation</a></li>
+            <li><a href="#education">Parcours</a></li>
+            <li><a href="#experience">Expériences</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#projects">Passions</a></li>
+            <li><a href="#cv">CV</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about" class="container">
+        <h2>Qui suis-je ?</h2>
+        <div class="card">
+            <p>Je m'appelle Antoine MANCEAU, j'ai 22 ans et je suis passionné par l'industrie musicale depuis mon plus jeune âge, particulièrement par le rap et la musique urbaine. Actuellement en dernière année de licence Information et Communication à l'UCO d'Angers, je me destine à devenir chargé de projet au sein d'un label ou d'une maison de disque.</p>
+            <p>Mon parcours atypique, alliant droit et communication, mes expériences dans l'événementiel musical et ma passion personnelle pour la création musicale font de moi un profil polyvalent et déterminé.</p>
+            
+            <div class="gallery">
+                <!-- Remplacez par des images de vos passions -->
+                <div class="gallery-item">
+                    <img src="images/PASSION MUSIQUE.jpg" alt="Passion musique" class="gallery-img">
+                    <div class="gallery-caption">Passion Musique</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Voyage.jpg" alt="Voyages" class="gallery-img">
+                    <div class="gallery-caption">Voyages</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/League of legend.png" alt="Jeux vidéo" class="gallery-img">
+                    <div class="gallery-caption">Jeux Vidéo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="education" class="container">
+        <h2>Mon Parcours Universitaire</h2>
+        <div class="card">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-2027</div>
+                    <h3>Mastère Production & Management de la Musique</h3>
+                    <p>IESA Paris - 5ème arrondissement</p>
+                    <p>Spécialisation en financement, production et management de projets musicaux</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2022-2025</div>
+                    <h3>Licence Information & Communication</h3>
+                    <p>Université Catholique de l'Ouest, Angers</p>
+                    <p>Spécialisation en stratégie de communication et conception web, design et innovation</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2020-2022</div>
+                    <h3>Licence de Droit</h3>
+                    <p>Université d'Angers</p>
+                    <p>Acquisition de méthodologie rigoureuse et compétences analytiques</p>
+                </div>
+            </div>
+            
+            <!-- Remplacez par une image de votre université -->
+            <div class="gallery" style="margin-top: 3rem;">
+                <div class="gallery-item">
+                    <img src="images/IESA.jpg" alt="Université" class="gallery-img">
+                    <div class="gallery-caption">Mon Université</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- À placer après la section "Mon Parcours Universitaire" -->
+<section id="projets-univ" class="container">
+    <h2>Mes Projets Universitaires</h2>
+    <div class="card">
+        <h3>Réalisations concrètes</h3>
+        <p>Durant ma licence, j'ai mené plusieurs projets ambitieux alliant communication, histoire et culture :</p>
+        
+        <!-- Projet 1 - Webconférence -->
+        <div style="margin-top: 3rem; background: rgba(0, 240, 255, 0.05); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--secondary); position: relative;">
+            <div style="position: absolute; top: -15px; left: 20px; background: var(--dark); padding: 0 1rem; font-weight: 600; color: var(--secondary);">Projet Webconférence</div>
+            <h4 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.5rem;">"Ils avaient derrière eux la France"</h4>
+            <p style="margin-bottom: 1.5rem;">Webconférence sur Angers pendant la Seconde Guerre mondiale</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: center;">
+                <div class="gallery-item" style="height: 200px;">
+                    <img src="images/ils avaient derrière aux la france.png" alt="Webconférence historique" class="gallery-img">
+                </div>
+                <div>
+                    <p><strong>Compétences mobilisées :</strong></p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
+                        <span style="display: inline-block; background: rgba(0, 240, 255, 0.2); color: var(--secondary); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 500;">Recherche historique</span>
+                        <span style="display: inline-block; background: rgba(0, 240, 255, 0.2); color: var(--secondary); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 500;">Scénarisation</span>
+                        <span style="display: inline-block; background: rgba(0, 240, 255, 0.2); color: var(--secondary); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 500;">Animation live</span>
+                        <span style="display: inline-block; background: rgba(0, 240, 255, 0.2); color: var(--secondary); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 500;">Outils webinar</span>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=bkJ8Kot80K8" style="display: inline-block; margin-top: 1.5rem; background: transparent; color: var(--secondary); padding: 0.6rem 1.5rem; border-radius: 30px; font-weight: 600; text-decoration: none; border: 2px solid var(--secondary); transition: all 0.3s ease;">
+                        Voir un extrait <i class="fas fa-external-link-alt" style="margin-left: 0.5rem;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Projet 2 - PFE Blabla-Land -->
+        <div style="margin-top: 3rem; background: rgba(255, 77, 141, 0.05); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--primary); position: relative;">
+            <div style="position: absolute; top: -15px; left: 20px; background: var(--dark); padding: 0 1rem; font-weight: 600; color: var(--primary);">Projet de fin d'études</div>
+            <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.5rem;">Blabla-Land</h4>
+            <p style="margin-bottom: 1.5rem;">Blog culturel sur le cinéma et la musique</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: center;">
+                <div class="gallery-item" style="height: 200px;">
+                    <img src="images/logo.png" alt="Blog Blabla-Land" class="gallery-img">
+                </div>
+                <div>
+                    <p><strong>Réalisations :</strong></p>
+                    <ul style="margin-left: 1.2rem; margin-top: 1rem;">
+                        <li>Création de la ligne éditoriale</li>
+                        <li>Design graphique et charte visuelle</li>
+                        <li>Stratégie de diffusion sur les réseaux</li>
+                        <li>Analyse des audiences</li>
+                        <li>Codage du blog avec VS code</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://www.blabla-land.fr/" style="display: inline-block; background: var(--primary); color: var(--dark); padding: 0.6rem 1.5rem; border-radius: 30px; font-weight: 600; text-decoration: none; margin-right: 1rem; transition: all 0.3s ease;">
+                            Visiter le blog <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Compétences transversales -->
+        <div style="margin-top: 3rem; background: rgba(255, 211, 0, 0.05); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255, 211, 0, 0.3);">
+            <h4 style="color: var(--accent); margin-bottom: 1.5rem; text-align: center;">Compétences Transversales Développées</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center;">
+                    <div style="background: rgba(255, 211, 0, 0.2); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
+                        <i class="fas fa-pen-fancy" style="color: var(--accent);"></i>
+                    </div>
+                    <p style="font-weight: 600;">Rédaction</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Articles de blog, scénarios, supports de communication</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: rgba(255, 211, 0, 0.2); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
+                        <i class="fas fa-users" style="color: var(--accent);"></i>
+                    </div>
+                    <p style="font-weight: 600;">Gestion de communauté</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Animation des réseaux sociaux, interaction avec le public</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: rgba(255, 211, 0, 0.2); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
+                        <i class="fas fa-chart-line" style="color: var(--accent);"></i>
+                    </div>
+                    <p style="font-weight: 600;">Analyse de données</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Mesure d'audience, statistiques de consultation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <section id="experience" class="container">
+        <h2>Mes Expériences Professionnelles</h2>
+        
+        <div class="card">
+            <h3>Assistant Chargé de Production</h3>
+            <p><strong>Festival Les Ardentes, Liège (Belgique) - 2024</strong></p>
+            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li>Gestion des accréditations via Qomeet (création plateforme, répartition accès)</li>
+                <li>Coordination d'une équipe de +10 bénévoles pendant le festival</li>
+                <li>Responsable de la remise des accréditations physiques/bracelets</li>
+                <li>Gestion des conflits et négociations avec les accrédités</li>
+                <li>Accueil des visiteurs et scan de billets dans les salles OM et Reflektor</li>
+            </ul>
+            
+            <!-- Remplacez par des images du festival -->
+            <div class="gallery" style="margin-top: 3rem;">
+                <div class="gallery-item">
+                    <img src="images/Festival.jpg" alt="Festival Les Ardentes" class="gallery-img">
+                    <div class="gallery-caption">Les Ardentes</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Backstage.jpg" alt="Gestion festival" class="gallery-img">
+                    <div class="gallery-caption">Backstage</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Responsable Accréditations - Festival Les Ardentes</h3>
+            <p><strong>Réalisations complémentaires :</strong></p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <!-- Réalisation 1 -->
+                <div style="background: rgba(0, 240, 255, 0.1); padding: 1.5rem; border-radius: 10px; border-bottom: 3px solid var(--secondary);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: var(--secondary); color: var(--dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4 style="color: var(--secondary);">Optimisation Processus</h4>
+                    </div>
+                    <p>Création d'un système de suivi en temps réel des accréditations délivrées permettant de réduire les temps d'attente</p>
+                </div>
+                
+                <!-- Réalisation 2 -->
+                <div style="background: rgba(255, 77, 141, 0.1); padding: 1.5rem; border-radius: 10px; border-bottom: 3px solid var(--primary);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: var(--primary); color: var(--dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h4 style="color: var(--primary);">Formation Équipe</h4>
+                    </div>
+                    <p>Conception d'une fiche et animation d'une session de formation pour les bénévoles sur les procédures d'accréditation et gestion des conflits</p>
+                </div>
+                
+                <!-- Réalisation 3 -->
+                <div style="background: rgba(255, 211, 0, 0.1); padding: 1.5rem; border-radius: 10px; border-bottom: 3px solid var(--accent);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: var(--accent); color: var(--dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h4 style="color: var(--accent);">Reporting Post-Event</h4>
+                    </div>
+                    <p>Production d'un rapport analytique avec statistiques de fréquentation et suggestions d'amélioration pour l'édition suivante</p>
+                </div>
+                
+                <!-- Réalisation 4 -->
+                <div style="background: rgba(106, 17, 203, 0.1); padding: 1.5rem; border-radius: 10px; border-bottom: 3px solid #6a11cb;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: #6a11cb; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4 style="color: #6a11cb;">Relation Partenaires</h4>
+                    </div>
+                    <p>Négociation des quotas d'accès VIP avec 15 partenaires du festival et gestion des demandes spéciales</p>
+                </div>
+            </div>
+            
+            <!-- Bilan -->
+            <div style="margin-top: 2.5rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 10px; border-left: 4px solid var(--secondary);">
+                <p style="font-style: italic; color: var(--secondary);">"Cette expérience m'a permis de développer mes compétences en événementielle tout en confirmant mon attrait pour le milieu musical. J'ai particulièrement apprécié l'aspect relationnel et la résolution de problèmes en temps réel."</p>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Vidéaste/Monteur</h3>
+            <p><strong>Autentic Prod - 2023</strong></p>
+            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li>Réalisation de montages vidéo pour des projets publicitaires</li>
+                <li>Participation aux tournages en tant qu'assistant cadreur</li>
+                <li>Initiation aux techniques de storytelling visuel</li>
+            </ul>
+            
+            <!-- Remplacez par des images de vos réalisations vidéo -->
+            <div class="gallery" style="margin-top: 3rem;">
+                <div class="gallery-item">
+                    <img src="images/Adobe première pro.png" alt="Autentic prod" class="gallery-img">
+                    <div class="gallery-caption">Montage Vidéo</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Autentic prod.png" alt="Tournage" class="gallery-img">
+                    <div class="gallery-caption">Tournage</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="container">
+        <h2>Mes Compétences</h2>
+        <div class="card">
+            <h3>Compétences Techniques</h3>
+            <div class="skills-container">
+                <span class="skill">Suite Office</span>
+                <span class="skill">Qomeet</span>
+                <span class="skill">Mise en place guestlist</span>
+                <span class="skill">Montage vidéo</span>
+                <span class="skill">Production musicale</span>
+                <span class="skill">Rédaction</span>
+                <span class="skill">Gestion d'équipe</span>
+                <span class="skill">Organisation événementielle</span>
+                <span class="skill">Suite Adobe</span>
+                <span class="skill">FL studio</span>
+            </div>
+            
+            <h3 style="margin-top: 3rem;">Soft Skills</h3>
+            <div class="skills-container">
+                <span class="skill">Adaptabilité</span>
+                <span class="skill">Résolution de problèmes</span>
+                <span class="skill">Travail d'équipe</span>
+                <span class="skill">Autonomie</span>
+                <span class="skill">Créativité</span>
+                <span class="skill">Gestion du stress</span>
+            </div>
+            
+            
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" class="container">
+        <h2>Mes Passions</h2>
+        <div class="card">
+            <h3>Production Musicale</h3>
+            <p>Création d'instrumentales rap en amateur, veille constante sur l'industrie musicale</p>
+            
+            <h3 style="margin-top: 2rem;">Voyages</h3>
+            <p>USA, Thaïlande, Maroc, Tunisie, Espagne, Écosse - Ouverture interculturelle</p>
+            
+            <h3 style="margin-top: 2rem;">Centres d'intérêt</h3>
+            <p>Jeux vidéo (League of Legends, Counter Strike), séries (One Piece), documentaires, actualité politique</p>
+            
+            <!-- Remplacez par des images de vos projets/passions -->
+            <div class="gallery" style="margin-top: 3rem;">
+                <div class="gallery-item">
+                    <img src="images/FL studio.jpg" alt="Production musicale" class="gallery-img">
+                    <div class="gallery-caption">Home Studio</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Voyage.jpg" alt="Voyages" class="gallery-img">
+                    <div class="gallery-caption">Aventure</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/League of legend.png" alt="Jeux vidéo" class="gallery-img">
+                    <div class="gallery-caption">Gaming</div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Section Productions Musicales -->
+<section id="productions" class="container">
+    <h2>Mes Productions Musicales</h2>
+    <div class="card">
+        <h3>Découvrez mes instrumentales</h3>
+        <p>Compositions personnelles réalisées en tant que beatmaker amateur :</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <!-- Production 1 -->
+            <div style="text-align: center;">
+                <div class="gallery-item" style="height: 180px; cursor: pointer;" onclick="window.open('https://youtu.be/VOTRE_LIEN_1', '_blank')">
+                    <img src="images/Népal.png" alt="Production 1" class="gallery-img">
+                    <div class="gallery-caption" style="background: rgba(0,0,0,0.7);">Écouter</div>
+                </div>
+                <h4 style="margin: 1rem 0 0.5rem; color: var(--secondary);">Titre Production 1</h4>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Genre : Trap/Mélancolique</p>
+                <a href="https://www.youtube.com/watch?v=tjFswnZLs8k" target="_blank" style="display: inline-block; margin-top: 0.5rem; color: var(--secondary); font-weight: 600; text-decoration: none;">
+                    Voir sur YouTube <i class="fas fa-external-link-alt" style="margin-left: 0.3rem;"></i>
+                </a>
+            </div>
+            
+            <!-- Production 2 -->
+            <div style="text-align: center;">
+                <div class="gallery-item" style="height: 180px; cursor: pointer;" onclick="window.open('https://youtu.be/VOTRE_LIEN_2', '_blank')">
+                    <img src="images/Booba.png" alt="Production 2" class="gallery-img">
+                    <div class="gallery-caption" style="background: rgba(0,0,0,0.7);">Écouter</div>
+                </div>
+                <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Titre Production 2</h4>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Genre : Trap/Mélodique</p>
+                <a href="https://www.youtube.com/watch?v=ODJMmQte0Lo" target="_blank" style="display: inline-block; margin-top: 0.5rem; color: var(--primary); font-weight: 600; text-decoration: none;">
+                    Voir sur YouTube <i class="fas fa-external-link-alt" style="margin-left: 0.3rem;"></i>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+    </div>
+</div>
+
+<script>
+// Fermer la modal avec la touche ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        document.getElementById('videoModal').style.display = 'none';
+    }
+});
+</script>
+
+    <!-- Ajoutez cette section juste avant la section Contact -->
+<section id="cv" class="container">
+    <h2>Mon CV</h2>
+    <div class="card">
+        <h3>Télécharger mon CV complet</h3>
+        <p>Vous pouvez consulter et télécharger mon curriculum vitæ au format PDF :</p>
+        
+        <div style="margin-top: 2rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+            <!-- Version française -->
+            <div style="background: rgba(0, 240, 255, 0.1); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--secondary); flex: 1; min-width: 250px;">
+                <h4 style="color: var(--secondary); margin-bottom: 1rem;">Version Française</h4>
+                <a href="images/CV Antoine MANCEAU.pdf" download style="display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--dark); padding: 0.8rem 1.5rem; border-radius: 30px; font-weight: 600; text-decoration: none; transition: transform 0.3s ease;">
+                    <i class="fas fa-download" style="margin-right: 0.5rem;"></i> Télécharger
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Dernière mise à jour : Juin 2024</p>
+            </div>
+            
+            
+        
+        <!-- Version visuelle du CV (optionnelle) -->
+        <div style="margin-top: 3rem;">
+            <h4 style="color: var(--accent); margin-bottom: 1.5rem;">Aperçu de mon CV</h4>
+            <div class="gallery">
+                <div class="gallery-item" style="height: 300px;">
+                    <img src="images/CV Antoine MANCEAU.png" alt="Aperçu CV" class="gallery-img" style="object-fit: contain; background: white;">
+                    <div class="gallery-caption">Mon Parcours</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<section id="contact" class="container">
+        <h2>Contact</h2>
+        <div class="card">
+            <p>Si vous souhaitez échanger sur un projet ou une opportunité.</p>
+            <p style="margin-top: 1.5rem;"><strong><i class="fas fa-envelope"></i> Email :</strong> antoine.manceau1@outlook.fr</p>
+            <p style="margin-top: 1rem;"><strong><i class="fas fa-phone"></i> Téléphone :</strong> +33 7 81 99 83 20</p>
+            <p style="margin-top: 1rem;"><strong><i class="fas fa-map-marker-alt"></i> Adresse :</strong> Trélazé, 3 impasse jean georget</p>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/antoine-manceau-5a621a293/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/amnnncc?igsh=eDc1dmZzNmgzM2Ex&utm_source=qr" title="Instagram"><i class="fab fa-instagram"></i></a>   
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <p style="font-weight: 700; font-size: 1.2rem;">Antoine MANCEAU</p>
+            <p>&copy; 2025</p>
+        </div>
+    </footer>
+</body>
+</html>
